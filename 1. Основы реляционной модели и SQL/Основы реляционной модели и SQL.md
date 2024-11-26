@@ -33,3 +33,99 @@ VALUES ("Белая гвардия", "Булгаков М.А.", 540.50, 5),
        ("Братья Карамазовы", "Достоевский Ф.М.", 799.01, 2);
 ```
 </details>
+
+### 1.2 Выборка данных
+
+<details>
+<summary><b>Задание №1:</b> Выборка всех данных из таблицы.</summary>
+  
+  ```mysql
+SELECT *
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №2:</b> Выборка отдельных столбцов из таблицы.</summary>
+  
+  ```mysql
+SELECT author, title, price
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №3:</b> Присвоение новых имен столбцам при формировании выборки.</summary>
+  
+  ```mysql
+SELECT title AS Название, author AS Автор
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №4:</b> Выборка данных с созданием вычисляемого столбца.</summary>
+  
+  ```mysql
+SELECT title, amount, amount * 1.65 AS pack
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №5:</b> Выборка данных, вычисляемые столбцы, математические функции.</summary>
+  
+  ```mysql
+SELECT title, author, amount, ROUND((price*0.7), 2) as new_price
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №6:</b> Выборка данных, вычисляемые столбцы, логические функции.</summary>
+  
+  ```mysql
+SELECT author, title, ROUND(price * IF(author = "Булгаков М.А.", 1.1, IF(author = "Есенин С.А.", 1.05, 1)), 2) AS new_price
+FROM book
+```
+</details>
+
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
+  
+  ```mysql
+
+```
+</details>
