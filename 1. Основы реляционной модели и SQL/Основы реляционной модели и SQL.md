@@ -91,7 +91,7 @@ FROM book
 </details>
 
 <details>
-<summary><b>Задание №1:</b> Создание таблицы.</summary>
+<summary><b>Задание №7:</b> Выборка данных по условию.</summary>
   
   ```mysql
 
@@ -99,7 +99,7 @@ FROM book
 </details>
 
 <details>
-<summary><b>Задание №1:</b> Создание таблицы.</summary>
+<summary><b>Задание №8:</b> Выборка данных, логические операции.</summary>
   
   ```mysql
 
@@ -107,7 +107,31 @@ FROM book
 </details>
 
 <details>
-<summary><b>Задание №1:</b> Создание таблицы.</summary>
+<summary><b>Задание №9:</b> Выборка данных, операторы BETWEEN, IN.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №10:</b> Выборка данных с сортировкой.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №11:</b> Выборка данных, оператор LIKE.</summary>
+  
+  ```mysql
+
+```
+</details>
+
+<details>
+<summary><b>Задание №12:</b> Задание.</summary>
   
   ```mysql
 
