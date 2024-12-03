@@ -236,6 +236,63 @@ ORDER BY 2 DESC
 ### 1.4 Вложенные запросы
 
 <details>
+<summary><b>Задание №1:</b> Вложенный запрос, возвращающий одно значение.</summary>
+  
+```mysql
+SELECT author, title, price
+FROM book
+WHERE price <= (
+    SELECT AVG(price)
+    FROM book
+    )
+ORDER BY 3 DESC
+```
+</details>
+<details>
+<summary><b>Задание №2:</b> Использование вложенного запроса в выражении.</summary>
+  
+```mysql
+SELECT author, title, price
+FROM book
+WHERE ABS(price - (SELECT MIN(price) FROM book)) <= 150
+ORDER BY 3 ASC
+```
+</details>
+<details>
+<summary><b>Задание №3:</b> Вложенный запрос, оператор IN.</summary>
+  
+```mysql
+SELECT author, title, amount
+FROM book
+WHERE amount NOT IN (
+    SELECT amount
+    FROM book
+    GROUP BY 1
+    HAVING COUNT(*) > 1)
+```
+</details>
+<details>
+<summary><b>Задание №4:</b> Вложенный запрос, операторы ANY и ALL.</summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №2:</b> Создание таблицы.</summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №2:</b> Создание таблицы.</summary>
+  
+```mysql
+
+```
+</details>
+<details>
 <summary><b>Задание №2:</b> Создание таблицы.</summary>
   
 ```mysql
