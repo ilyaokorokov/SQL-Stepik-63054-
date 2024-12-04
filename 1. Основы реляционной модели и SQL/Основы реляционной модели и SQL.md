@@ -275,16 +275,141 @@ WHERE amount NOT IN (
 <summary><b>Задание №4:</b> Вложенный запрос, операторы ANY и ALL.</summary>
   
 ```mysql
-
+SELECT author, title, price
+FROM book
+WHERE price < ANY (
+    SELECT MIN(price)
+    FROM book
+    GROUP BY author
+    )
 ```
 </details>
 <details>
-<summary><b>Задание №2:</b> Создание таблицы.</summary>
+<summary><b>Задание №5:</b> Вложенный запрос после SELECT.</summary>
+  
+```mysql
+SELECT title, author, amount, ABS((SELECT MAX(amount) FROM book) - amount) AS Заказ
+FROM book
+HAVING Заказ > 0
+```
+</details>
+<details>
+<summary><b>Задание №6:</b> Задание.</summary>
+  
+```mysql
+SELECT title, author, price, amount, ((SELECT MAX(amount) FROM book) - amount ) AS Заказ 
+FROM book
+WHERE price < ANY (SELECT MAX(price) FROM book)
+HAVING Заказ > 5
+```
+</details>
+
+### 1.5 Запросы корректировки данных
+<details>
+<summary><b>Задание №1:</b> Создание пустой таблицы.</summary>
+  
+```mysql
+CREATE TABLE supply (
+    supply_id INT PRIMARY KEY AUTO_INCREMENT,
+    title VARCHAR(50),
+    author VARCHAR(30),
+    price DECIMAL(8, 2),
+    amount INT
+    )
+```
+</details>
+<details>
+<summary><b>Задание №2:</b> Добавление записей в таблицу.</summary>
+  
+```mysql
+INSERT INTO supply (title, author, price, amount)
+VALUES ("Лирика", "Пастернак Б.Л.", 518.99, 2),
+       ("Черный человек", "Есенин С.А.", 570.20, 6),
+       ("Белая гвардия", "Булгаков М.А.", 540.50, 7),
+       ("Идиот", "Достоевский Ф.М.", 360.80, 3)
+```
+</details>
+<details>
+<summary><b>Задание №3:</b> Добавление записей из другой таблицы.</summary>
+  
+```mysql
+INSERT INTO book (title, author, price, amount)
+SELECT title, author, price, amount
+FROM supply
+WHERE author NOT IN ("Достоевский Ф.М.", "Булгаков М.А.")
+```
+</details>
+<details>
+<summary><b>Задание №4:</b> Добавление записей, вложенные запросы.</summary>
+  
+```mysql
+INSERT INTO book (title, author, price, amount)
+SELECT title, author, price, amount
+FROM supply
+WHERE author NOT IN (
+    SELECT author
+    FROM book
+    )
+```
+</details>
+<details>
+<summary><b>Задание №5:</b> Запросы на обновление.</summary>
+  
+```mysql
+UPDATE book
+SET price = price * 0.9
+WHERE amount BETWEEN 5 AND 10
+```
+</details>
+<details>
+<summary><b>Задание №6:</b> Запросы на обновление нескольких столбцов.</summary>
+  
+```mysql
+UPDATE book
+SET buy = IF(buy > amount, amount, buy),
+    price = IF(buy = 0, price * 0.9, price)
+```
+</details>
+<details>
+<summary><b>Задание №7:</b> Запросы на обновление нескольких таблиц .</summary>
+  
+```mysql
+UPDATE book, supply
+SET book.amount = book.amount + supply.amount,
+    book.price = (book.price + supply.price) / 2
+WHERE book.title = supply.title AND book.author = supply.author
+```
+</details>
+<details>
+<summary><b>Задание №8:</b> Запросы на удаление.</summary>
+  
+```mysql
+DELETE
+FROM supply
+WHERE author IN (
+    SELECT author
+    FROM book
+    GROUP BY 1
+    HAVING SUM(amount) > 10
+    )
+```
+</details>
+<details>
+<summary><b>Задание №9:</b> Запросы на создание таблицы.</summary>
   
 ```mysql
 
 ```
 </details>
+<details>
+<summary><b>Задание №10:</b> Создание таблицы.</summary>
+  
+```mysql
+
+```
+</details>
+
+### 1.6 Запросы корректировки данных
 <details>
 <summary><b>Задание №2:</b> Создание таблицы.</summary>
   
