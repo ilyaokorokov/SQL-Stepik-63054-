@@ -398,34 +398,213 @@ WHERE author IN (
 <summary><b>Задание №9:</b> Запросы на создание таблицы.</summary>
   
 ```mysql
-
+CREATE TABLE ordering AS
+SELECT author, title, (
+    SELECT AVG(amount)
+    FROM book
+    ) AS amount
+FROM book
+WHERE amount < (
+    SELECT AVG(amount)
+    FROM book
+    )
 ```
 </details>
 <details>
 <summary><b>Задание №10:</b> Создание таблицы.</summary>
   
 ```mysql
-
+CREATE TABLE new_table AS
+SELECT author, title, price
+FROM book
+WHERE amount BETWEEN 5 AND 15 AND author LIKE "%С.А."
 ```
 </details>
 
-### 1.6 Запросы корректировки данных
+### 1.6 Таблица "Командировки". Запросы на выборку
 <details>
-<summary><b>Задание №2:</b> Создание таблицы.</summary>
+<summary><b>Задание №1</b></summary>
+  
+```mysql
+SELECT name, city, per_diem, date_first, date_last
+FROM trip
+WHERE name LIKE "%а %"
+ORDER BY 5 DESC
+```
+</details>
+<details>
+<summary><b>Задание №2</b></summary>
+  
+```mysql
+SELECT DISTINCT(name)
+FROM trip
+WHERE city = "Москва"
+ORDER BY 1 ASC
+```
+</details>
+<details>
+<summary><b>Задание №3</b></summary>
+  
+```mysql
+SELECT city, COUNT(city) AS Количество
+FROM trip
+GROUP BY city
+ORDER BY 1 ASC
+```
+</details>
+<details>
+<summary><b>Задание №4</b></summary>
+  
+```mysql
+SELECT city, COUNT(city) as Количество
+FROM trip
+GROUP BY city
+ORDER BY Количество DESC
+LIMIT 2
+```
+</details>
+<details>
+<summary><b>Задание №5</b></summary>
+  
+```mysql
+SELECT name, city, (DATEDIFF(date_last, date_first) + 1) AS Длительность
+FROM trip
+WHERE city NOT IN ("Москва", "Санкт-Петербург")
+ORDER BY 3 DESC, 1 DESC
+```
+</details>
+<details>
+<summary><b>Задание №6</b></summary>
+  
+```mysql
+SELECT name, city, date_first, date_last
+FROM trip
+WHERE DATEDIFF(date_last, date_first) = (
+    SELECT MIN(DATEDIFF(date_last, date_first))
+    FROM trip
+    )
+```
+</details>
+<details>
+<summary><b>Задание №7</b></summary>
+  
+```mysql
+SELECT name, city, date_first, date_last
+FROM trip
+WHERE MONTH(date_first) = MONTH(date_last)
+ORDER BY 2, 1
+```
+</details>
+<details>
+<summary><b>Задание №8</b></summary>
+  
+```mysql
+SELECT MONTHNAME(date_first) AS Месяц, COUNT(*) AS Количество
+FROM trip
+GROUP BY 1
+ORDER BY 2 DESC, 1
+```
+</details>
+<details>
+<summary><b>Задание №9</b></summary>
+  
+```mysql
+SELECT name, city, date_first, (DATEDIFF(date_last, date_first) + 1) * per_diem AS Сумма
+FROM trip
+WHERE MONTH(date_first) = 2 OR MONTH(date_first) = 3
+ORDER BY 1, 4 DESC
+```
+</details>
+<details>
+<summary><b>Задание №10</b></summary>
+  
+```mysql
+SELECT name, SUM(per_diem * (DATEDIFF(date_last, date_first) + 1)) AS Сумма
+FROM trip
+GROUP BY 1
+HAVING COUNT(*) > 3
+ORDER BY 2 DESC
+```
+</details>
+
+### 1.7 Таблица "Нарушения ПДД". Запросы, корректировки
+<details>
+<summary><b>Задание №1</b></summary>
+  
+```mysql
+CREATE TABLE fine (
+    fine_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(30),
+    number_plate VARCHAR(6),
+    violation VARCHAR(50),
+    sum_fine DECIMAL(8, 2),
+    date_violation DATE,
+    date_payment DATE
+    )
+```
+</details>
+<details>
+<summary><b>Задание №2</b></summary>
+  
+```mysql
+INSERT INTO fine (name, number_plate, violation, sum_fine, date_violation, date_payment)
+VALUES ('Баранов П.Е.', 'Р523ВТ', 'Превышение скорости(от 40 до 60)', Null, '2020-02-14', Null),
+('Абрамова К.А.', 'О111АВ', 'Проезд на запрещающий сигнал', Null, '2020-02-23', Null),
+('Яковлев Г.Р.', 'Т330ТТ', 'Проезд на запрещающий сигнал', Null, '2020-03-03', Null)
+```
+</details>
+<details>
+<summary><b>Задание №3</b></summary>
+  
+```mysql
+UPDATE fine, traffic_violation
+SET fine.sum_fine = traffic_violation.sum_fine
+WHERE fine.violation = traffic_violation.violation AND fine.sum_fine IS NULL
+```
+</details>
+<details>
+<summary><b>Задание №4</b></summary>
+  
+```mysql
+SELECT name, number_plate, violation
+FROM fine
+GROUP BY 1, 2, 3
+HAVING COUNT(violation) >= 2
+ORDER BY 1, 2, 3
+```
+</details>
+<details>
+<summary><b>Задание №5</b></summary>
   
 ```mysql
 
 ```
 </details>
 <details>
-<summary><b>Задание №2:</b> Создание таблицы.</summary>
+<summary><b>Задание №6</b></summary>
   
 ```mysql
 
 ```
 </details>
 <details>
-<summary><b>Задание №2:</b> Создание таблицы.</summary>
+<summary><b>Задание №7</b></summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №8</b></summary>
+  
+```mysql
+
+```
+</details>
+
+### 1.8 Таблица "Нарушения ПДД". Запросы, корректировки
+<details>
+<summary><b>Задание №1:</b> Создание таблицы.</summary>
   
 ```mysql
 
