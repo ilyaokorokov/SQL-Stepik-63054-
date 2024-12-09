@@ -577,36 +577,50 @@ ORDER BY 1, 2, 3
 <summary><b>Задание №5</b></summary>
   
 ```mysql
-
+UPDATE fine, (
+  SELECT name, number_plate, violation
+  FROM fine
+  GROUP BY 1, 2, 3
+  HAVING COUNT(violation) >= 2
+  ) AS query_in
+SET fine.sum_fine = fine.sum_fine * 2
+WHERE fine.name = query_in.name AND 
+      fine.number_plate = query_in.number_plate AND 
+      fine.violation = query_in.violation AND
+      fine.date_payment IS NULL
 ```
 </details>
 <details>
 <summary><b>Задание №6</b></summary>
   
 ```mysql
-
+UPDATE fine f, payment p 
+SET f.date_payment = p.date_payment,
+    f.sum_fine = IF(DATEDIFF(f.date_payment, f.date_violation) <= 20, f.sum_fine / 2, f.sum_fine) 
+WHERE f.name = p.name AND
+      f.number_plate = p.number_plate AND
+      f.violation = p.violation AND
+      f.date_violation = p.date_violation AND
+      f.date_payment IS NULL
 ```
 </details>
 <details>
 <summary><b>Задание №7</b></summary>
   
 ```mysql
-
+CREATE TABLE back_payment AS (
+    SELECT name, number_plate, violation, sum_fine, date_violation
+    FROM fine
+    WHERE date_payment IS NULL
+    )
 ```
 </details>
 <details>
 <summary><b>Задание №8</b></summary>
   
 ```mysql
-
-```
-</details>
-
-### 1.8 Таблица "Нарушения ПДД". Запросы, корректировки
-<details>
-<summary><b>Задание №1:</b> Создание таблицы.</summary>
-  
-```mysql
-
+DELETE 
+FROM fine
+WHERE date_violation < '2020-02-01'
 ```
 </details>
