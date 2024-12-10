@@ -109,7 +109,12 @@ ORDER BY 2
 <summary><b>Задание №5:</b> Запросы для нескольких таблиц с группировкой.</summary>
   
 ```mysql
-
+SELECT name_author, SUM(amount) AS Количество
+FROM book
+RIGHT JOIN author ON book.author_id = author.author_id
+GROUP BY 1
+HAVING Количество < 10 OR Количество IS NULL
+ORDER BY 2
 ```
 </details>
 <details>
