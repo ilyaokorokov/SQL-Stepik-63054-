@@ -88,18 +88,25 @@ WHERE title IS NULL
 <summary><b>Задание №3:</b> Перекрестное соединение CROSS JOIN.</summary>
   
 ```mysql
-
+SELECT name_city, name_author, DATE_ADD("2020-01-01", INTERVAL FLOOR(RAND() * 365) DAY) AS Дата
+FROM city, author
+ORDER BY 1, 3 DESC
 ```
 </details>
 <details>
-<summary><b>Задание №4:</b> </summary>
+<summary><b>Задание №4:</b> Запросы на выборку из нескольких таблиц.</summary>
   
 ```mysql
-
+SELECT name_genre, title, name_author
+FROM book
+INNER JOIN genre ON book.genre_id = genre.genre_id
+INNER JOIN author ON book.author_id = author.author_id
+WHERE name_genre = "роман"
+ORDER BY 2
 ```
 </details>
 <details>
-<summary><b>Задание №5:</b> </summary>
+<summary><b>Задание №5:</b> Запросы для нескольких таблиц с группировкой.</summary>
   
 ```mysql
 
