@@ -62,7 +62,7 @@ VALUES ("Стихотворения и поэмы", 3, 2, 650.00, 15),
 ```
 </details>
 
-### 2.1 Запросы на выборку, соединение таблиц
+### 2.2 Запросы на выборку, соединение таблиц
 <details>
 <summary><b>Задание №1:</b> Соединение INNER JOIN.</summary>
   
@@ -92,19 +92,49 @@ WHERE title IS NULL
 ```
 </details>
 <details>
-<summary><b>Задание №1:</b> </summary>
+<summary><b>Задание №4:</b> </summary>
   
 ```mysql
 
 ```
 </details>
 <details>
-<summary><b>Задание №1:</b> </summary>
+<summary><b>Задание №5:</b> </summary>
   
 ```mysql
 
 ```
 </details>
+<details>
+<summary><b>Задание №6:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №7:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №8:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №9:</b> </summary>
+  
+```mysql
+
+```
+</details>
+
+### 2.3 Запросы корректировки, соединение таблиц
 <details>
 <summary><b>Задание №1:</b> </summary>
   
