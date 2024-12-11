@@ -118,14 +118,19 @@ ORDER BY 2
 ```
 </details>
 <details>
-<summary><b>Задание №6:</b> </summary>
+<summary><b>Задание №6:</b> Запросы для нескольких таблиц со вложенными запросами.</summary>
   
 ```mysql
-
+SELECT name_author
+FROM author
+LEFT JOIN book ON author.author_id = book.author_id
+GROUP BY 1
+HAVING COUNT(DISTINCT(genre_id)) = 1
+ORDER BY 1
 ```
 </details>
 <details>
-<summary><b>Задание №7:</b> </summary>
+<summary><b>Задание №7:</b> Вложенные запросы в операторах соединения.</summary>
   
 ```mysql
 
