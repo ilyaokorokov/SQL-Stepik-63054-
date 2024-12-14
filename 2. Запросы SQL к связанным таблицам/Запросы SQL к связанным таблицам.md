@@ -133,6 +133,98 @@ ORDER BY 1
 <summary><b>Задание №7:</b> Вложенные запросы в операторах соединения.</summary>
   
 ```mysql
+SELECT title, name_author, name_genre, price, amount
+FROM author
+INNER JOIN book ON author.author_id = book.author_id
+INNER JOIN genre ON book.genre_id = genre.genre_id
+WHERE book.genre_id IN (
+    SELECT genre_id
+    FROM book
+    GROUP BY genre_id
+    HAVING SUM(amount) = (
+        SELECT SUM(amount)
+        FROM book
+        GROUP BY genre_id
+        ORDER BY 1 DESC
+        LIMIT 1
+        )
+    )
+ORDER BY 1
+```
+</details>
+<details>
+<summary><b>Задание №8:</b> Операция соединение, использование USING()</summary>
+  
+```mysql
+SELECT book.title AS Название, name_author AS Автор, book.amount + supply.amount AS Количество
+FROM author
+INNER JOIN book USING(author_id)
+INNER JOIN supply ON book.title = supply.title AND author.name_author = supply.author AND book.price = supply.price
+```
+</details>
+<details>
+<summary><b>Задание №9:</b> </summary>
+  
+```mysql
+SELECT title, name_genre, price
+FROM genre
+INNER JOIN book USING(genre_id)
+WHERE amount > 8
+ORDER BY price DESC
+```
+</details>
+
+### 2.3 Запросы корректировки, соединение таблиц
+<details>
+<summary><b>Задание №1:</b> Запросы на обновление, связанные таблицы.</summary>
+  
+```mysql
+UPDATE book
+INNER JOIN author USING(author_id)
+INNER JOIN supply ON (book.title, author.name_author) = (supply.title, supply.author)
+SET book.amount = book.amount + supply.amount, book.price = ((book.price * book.amount) + (supply.price * supply.amount)) / (book.amount + supply.amount), supply.amount = 0
+WHERE book.price != supply.price
+```
+</details>
+<details>
+<summary><b>Задание №2:</b> Запросы на добавление, связанные таблицы.</summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №3:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №4:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №5:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №6:</b> </summary>
+  
+```mysql
+
+```
+</details>
+<details>
+<summary><b>Задание №7:</b> </summary>
+  
+```mysql
 
 ```
 </details>
@@ -143,15 +235,17 @@ ORDER BY 1
 
 ```
 </details>
+
+### 2.4 База данных "Интернет-магазин книг", запросы на выборку
 <details>
-<summary><b>Задание №9:</b> </summary>
+<summary><b>Задание №1:</b> </summary>
   
 ```mysql
 
 ```
 </details>
 
-### 2.3 Запросы корректировки, соединение таблиц
+### 2.5 База данных "Интернет-магазин книг", запросы корректировки
 <details>
 <summary><b>Задание №1:</b> </summary>
   
